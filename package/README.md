@@ -44,6 +44,15 @@ pages(
 )
 ```
 
+**Resolve your own directories**
+
+```js
+// Create 'page' directories in folder `/custom` at root of project
+pages(
+  resolve(import.meta.env, "custom") 
+)
+```
+
 **Ignoring routes**
 
 ```js
