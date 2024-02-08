@@ -1,0 +1,11 @@
+{
+  "name": "package-root",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {},
+  "license": "MIT",
+  "devDependencies": {
+    "astro": "^4.3.3"
+  }
+}

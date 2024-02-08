@@ -1,0 +1,138 @@
+# `astro-pages`
+
+Add custom file based routing directories in Astro
+
+## Why `astro-pages`?
+
+Astro does not have an option to change the location of the `page` folder, and ignoring files/folders  requires you to prefix their names with an underscore `_`.
+
+## Features
+- Add file based routing anywhere inside your project
+- Use glob patterns to match routes
+- Supports negative glob patterns to ignore routes
+- Override/transform route patterns
+
+## Using
+
+Install package:
+
+```
+npm i astro-pages  
+```
+
+Add to Astro config:
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import pages from 'astro-pages';
+
+export default defineConfig({
+  // Create 'page' directory at 'src/custom'
+  integrations: [pages('custom')],
+});
+```
+
+## Examples
+
+**Adding page directories**
+
+```js
+// Create 'page' directories at 'src/blog' and `src/projects`
+pages(
+  'blog', 
+  'projects'
+)
+```
+
+**Ignoring routes**
+
+```js
+pages(
+  {
+    dir: 'custom',
+    // Ignore all routes inside 'src/custom/ignore'
+    glob: '["**.{astro,ts,js}", "!**/ignore/**"]'
+  },
+),
+```
+
+**Transform route pattern**
+
+```js
+pages(
+  {
+    dir: 'custom',
+    // Transform page patterns, add base path to routes
+    pattern: ({ pattern }) => '/base' + pattern 
+  },
+),
+```
+
+**Customize logging**
+
+```js
+pages(
+  {
+    dir: 'custom',
+    // Log injetced pages and warnings
+    log: "verbose"
+  },
+),
+```
+
+**Use it all together**
+
+```js
+pages(
+  {
+    dir: 'custom',
+    glob: '["**.{astro,ts,js}", "!**/ignore/**"]'
+    pattern: ({ pattern }) => '/base' + pattern 
+    log: "verbose"
+  },
+  // ...
+),
+```
+
+## `Option` Reference
+
+`pages(...options: (string | Option)[])`
+
+### `dir`
+
+**Type**: `string`
+
+Directory of pages, relative dirs are resolved relative to `srcDir` (`/src` by default). Directories located outside the root of your project may cause problems.
+
+### `glob`
+
+**Type**: `string | string[]`
+
+**Default**: `"**.{astro,ts,js}"`
+
+A glob pattern (or array of glob patterns) matching pages inside your page directory. [Supports negative patterns](https://www.npmjs.com/package/fast-glob#how-to-exclude-directory-from-reading) to ignore specific paths. Only point to file extensions that Astro supports!
+
+### `pattern`
+
+**Type**: `function`
+
+```ts
+(route: {
+  dir: string;
+  entrypoint: string;
+  ext: string;
+  pattern: string;
+}) => string
+```
+
+function used to transform the pattern/path pages are located at
+
+### `log`
+
+**Type**: `"verbose" | "minimal" | boolean | null | undefined`
+
+**Default**: `true`
+
+- `"verbose"`: Log injected pages and warnings
+- `"minimal" | true`: Log addition of a page directory
+- `false | null | undefined`: No logging

@@ -1,0 +1,31 @@
+{
+  "name": "astro-pages",
+  "version": "0.0.1",
+  "description": "Add page folders to your Astro project",
+  "keywords": [
+    "astro",
+    "withastro",
+    "astro-integration"
+  ],
+  "author": "Bryce Russell",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brycerussell/astro-pages",
+    "directory": "packages/astro-pages"
+  },
+  "bugs": "https://github.com/brycerussell/astro-pages/issues",
+  "homepage": "https://github.com/brycerussell/astro-pages",
+  "scripts": {},
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "devDependencies": {
+    "astro": "^4.3.3",
+    "fast-glob": "^3.3.2"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.16"
+  }
+}
