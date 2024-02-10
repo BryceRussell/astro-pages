@@ -21,6 +21,7 @@
   "exports": {
     ".": "./index.ts",
     "./utils/*": "./utils/*",
+    "./plugins/*": "./plugins/*",
     "./types": "./types.ts"
   },
   "devDependencies": {
