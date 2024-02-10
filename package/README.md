@@ -150,7 +150,7 @@ export default function(options): AstroIntegration {
 ```js
 // my-package/index.ts
 import { defineIntegration } from "astro-integration-kit";
-import addPageDirPlugin from "astro-pages/plugins/astro-integration-kit";
+import addPageDirPlugin from "astro-pages/plugins/astro-integration-kit.ts";
 
 export default defineIntegration({
     name: "my-integration",
