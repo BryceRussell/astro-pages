@@ -20,6 +20,7 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./utils/*": "./utils/*",
     "./types": "./types.ts"
   },
   "devDependencies": {
