@@ -45,7 +45,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
   return path || srcDir
 }
 
-export function addPageDir(options: IntegrationOption) {
+export default function addPageDir(options: IntegrationOption) {
 
   let {
     dir,

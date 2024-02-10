@@ -145,6 +145,30 @@ export default function(options): AstroIntegration {
 }
 ```
 
+**Use as a [`astro-integration-kit`](https://astro-integration-kit.netlify.app/getting-started/installation/) plugin**
+
+```js
+// my-package/index.ts
+import { defineIntegration } from "astro-integration-kit";
+import addPageDirPlugin from "astro-pages/plugins/astro-integration-kit.ts";
+
+export default defineIntegration({
+    name: "my-integration",
+    plugins: [addPageDirPlugin],
+    setup() {
+        return {
+            "astro:config:setup": ({ addPageDir }) => {
+              // Inject pages from your package's 'pages' folder
+              addPageDir({
+                cwd: import.meta.url,
+                dir: "pages"
+              })
+            }
+        }
+    }
+})
+```
+
 ## `Option` Reference
 
 ### `dir`

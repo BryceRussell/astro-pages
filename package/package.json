@@ -1,6 +1,6 @@
 {
   "name": "astro-pages",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Add custom file based routing directories in Astro",
   "keywords": [
     "astro",
@@ -20,6 +20,8 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./utils/*": "./utils/*",
+    "./plugins/*": "./plugins/*",
     "./types": "./types.ts"
   },
   "devDependencies": {
@@ -27,6 +29,7 @@
     "fast-glob": "^3.3.2"
   },
   "dependencies": {
-    "@types/node": "^20.11.16"
+    "@types/node": "^20.11.16",
+    "astro-integration-kit": "^0.1.0"
   }
 }
