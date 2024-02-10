@@ -8,10 +8,11 @@ export interface Option {
   dir: string;
   glob?: string | string[];
   pattern?: (context: {
-    dir: string | undefined;
+    cwd: string;
+    dir: string;
     entrypoint: string;
     ext: string;
-    pattern: string | undefined;
+    pattern: string;
   }) => string;
 }
 

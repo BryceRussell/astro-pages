@@ -5,12 +5,10 @@ import { fileURLToPath } from 'node:url';
 import { existsSync} from 'node:fs';
 import fg from 'fast-glob';
 
-function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path: string, base?: string) {
+function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: string, base?: string): string {
   const { log, config, logger } = option
   
   const srcDir = fileURLToPath(config.srcDir.toString())
-
-  const cwd = base && stringToDir(option, 'cwd', base) || srcDir
 
   // Check if path is string
   if (!path || typeof path !== "string") {
@@ -25,7 +23,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path: string
 
   // Check if path is relative
   if (!isAbsolute(path)) {
-    path = resolve(cwd, path)
+    path = resolve(base || srcDir, path)
   }
 
   // Check if path is a file
@@ -44,7 +42,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path: string
     throw new AstroError(`[astro-pages]: '${key}' cannot point to Astro's 'pages' directory!`)
   }
 
-  return path
+  return path || srcDir
 }
 
 export function addPageDir(options: IntegrationOption) {
@@ -58,6 +56,8 @@ export function addPageDir(options: IntegrationOption) {
     logger,
     injectRoute
   } = options
+
+  cwd = stringToDir(options, 'cwd', cwd)
 
   dir = stringToDir(options, 'dir', dir, cwd)
 
@@ -99,6 +99,7 @@ export function addPageDir(options: IntegrationOption) {
       if (transformer) {
         pattern = transformer({
           dir,
+          cwd: cwd!,
           entrypoint,
           ext: extname(entrypoint),
           pattern
