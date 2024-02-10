@@ -11,6 +11,7 @@ Astro does not have an option to change the location of the `page` folder, and i
 - Use glob patterns to match routes
 - Supports negative glob patterns to ignore routes
 - Override/transform route patterns
+- Use standalone inside an integration
 
 ## Using
 
@@ -168,7 +169,7 @@ A glob pattern (or array of glob patterns) matching pages inside your page direc
 }) => string
 ```
 
-function used to transform the pattern/path pages are located at
+Function used to transform the pattern/path pages are located at
 
 ### `log`
 
@@ -176,6 +177,6 @@ function used to transform the pattern/path pages are located at
 
 **Default**: `true`
 
-- `"verbose"`: Log injected pages and warnings
+- `"verbose"`: Log all warnings and page injections
 - `"minimal" | true`: Log addition of a page directory
 - `false | null | undefined`: No logging
