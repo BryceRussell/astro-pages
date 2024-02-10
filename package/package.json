@@ -1,7 +1,7 @@
 {
   "name": "astro-pages",
-  "version": "0.0.1",
-  "description": "Add page folders to your Astro project",
+  "version": "0.1.0",
+  "description": "Add custom file based routing directories in Astro",
   "keywords": [
     "astro",
     "withastro",
@@ -19,7 +19,8 @@
   "scripts": {},
   "type": "module",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./types": "./types.ts"
   },
   "devDependencies": {
     "astro": "^4.3.3",
