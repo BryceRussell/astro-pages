@@ -11,9 +11,12 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
   const srcDir = fileURLToPath(config.srcDir.toString())
 
   // Check if path is string
-  if (!path || typeof path !== "string") {
-    throw new AstroError(`[astro-pages]: '${key}' is invalid!`, path)
+  if (key === "dir") {
+    if (!path || typeof path !== "string")
+      throw new AstroError(`[astro-pages]: '${key}' is invalid!`, path)
   }
+
+  path ??= srcDir
 
   // Check if path is a file URL
   if (path.startsWith('file:/')) {
@@ -42,7 +45,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
     throw new AstroError(`[astro-pages]: '${key}' cannot point to Astro's 'pages' directory!`)
   }
 
-  return path || srcDir
+  return path
 }
 
 export default function addPageDir(options: IntegrationOption) {
