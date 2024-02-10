@@ -41,17 +41,22 @@ export default defineConfig({
 // Create 'page' directories at 'src/blog' and `src/projects`
 pages(
   'blog', 
-  'projects'
+  {
+    dir: 'projects'
+  }
 )
 ```
 
-**Resolve your own directories**
+**Customize base directory for relative paths**
 
 ```js
-// Create 'page' directories in folder `/custom` at root of project
 pages(
-  resolve(import.meta.env, "custom") 
-)
+  {
+    // Resolves to 'custom' dir at the root of your project
+    dir: 'custom',
+    cwd: import.meta.url, // astro.config.mjs
+  },
+),
 ```
 
 **Ignoring routes**
@@ -117,10 +122,10 @@ export default function(options): AstroIntegration {
       'astro:config:setup': ({ config, logger, injectRoute }) => {
         
           const option = {
-            dir: 'custom',
-            glob: '["**.{astro,ts,js}", "!**/ignore/**"]'
-            pattern: ({ pattern }) => '/base' + pattern 
-            log: "verbose"
+            cwd: import.meta.url,
+            dir: 'pages',
+            glob: '["**.{astro,ts,js}"]'
+            log: "minimal"
             config,
             logger,
             injectRoute
@@ -147,6 +152,14 @@ export default function(options): AstroIntegration {
 **Type**: `string`
 
 Directory of pages, relative dirs are resolved relative to `srcDir` (`/src` by default). Directories located outside the root of your project may cause problems.
+
+### `cwd`
+
+**Type**: `string`
+
+**Default**: Astro config `srcDir`
+
+Directory that the `dir` option is resolved to if it is relative. If the `cwd` option is relative it is resolved relative to the `srcDir` in Astro config (`/src` by default).
 
 ### `glob`
 
