@@ -141,8 +141,6 @@ export default function(options): AstroIntegration {
 
 ## `Option` Reference
 
-`pages(...options: (string | Option)[])`
-
 ### `dir`
 
 **Type**: `string`
