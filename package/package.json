@@ -27,6 +27,7 @@
     "fast-glob": "^3.3.2"
   },
   "dependencies": {
-    "@types/node": "^20.11.16"
+    "@types/node": "^20.11.16",
+    "astro-integration-kit": "^0.1.0"
   }
 }
