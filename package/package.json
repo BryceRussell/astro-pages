@@ -1,6 +1,6 @@
 {
   "name": "astro-pages",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Add custom file based routing directories in Astro",
   "keywords": [
     "astro",
