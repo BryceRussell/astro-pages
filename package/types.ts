@@ -4,13 +4,15 @@ export type Prettify<T> = { [K in keyof T]: T[K]; } & {};
 
 export interface Option {
   log?: "verbose" | "minimal" | boolean | null | undefined;
+  cwd?: string;
   dir: string;
   glob?: string | string[];
   pattern?: (context: {
-    dir: string | undefined;
+    cwd: string;
+    dir: string;
     entrypoint: string;
     ext: string;
-    pattern: string | undefined;
+    pattern: string;
   }) => string;
 }
 

@@ -8,7 +8,8 @@ export default defineConfig({
       // 'src/custom/nested',
       {
         log: "verbose",
-        dir: "custom",
+        cwd: import.meta.url,
+        dir: "pages",
         glob: ['**.{astro,ts,js}', '!**/nested/**.{astro,ts,js}'],
         pattern: ({ pattern }) => pattern
       }
