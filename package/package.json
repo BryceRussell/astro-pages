@@ -19,7 +19,8 @@
   "scripts": {},
   "type": "module",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./types": "./types.ts"
   },
   "devDependencies": {
     "astro": "^4.3.3",
