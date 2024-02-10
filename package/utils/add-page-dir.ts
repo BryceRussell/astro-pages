@@ -11,7 +11,7 @@ export function addPageDir(options: IntegrationOption) {
     dir,
     glob,
     pattern: transformer,
-    log = true,
+    log,
     config,
     logger,
     injectRoute
@@ -83,7 +83,7 @@ export function addPageDir(options: IntegrationOption) {
 
 
   function injectPages() {
-    if (log === "minimal" || log === "verbose") logger.info("Adding page directory: " + dir)
+    if (log) logger.info("Adding page directory: " + dir)
 
     for (let [pattern, entrypoint] of Object.entries(patterns)) {
 
