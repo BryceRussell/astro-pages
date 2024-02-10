@@ -17,7 +17,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
 
   // Check if path is a file URL
   if (path.startsWith('file:/')) {
-    if (log === "minimal") logger.warn(`'${key}' is a file, using file's directory instead`)
+    if (log === "verbose") logger.warn(`'${key}' is a file, using file's directory instead`)
     path = dirname(fileURLToPath(path))
   } 
 
@@ -28,7 +28,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
 
   // Check if path is a file
   if (extname(path)) {
-    if (log === "minimal") logger.warn(`'${key}' is a file, using file's directory instead`)
+    if (log === "verbose") logger.warn(`'${key}' is a file, using file's directory instead`)
     path = dirname(path)
   }
 
