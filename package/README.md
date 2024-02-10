@@ -103,6 +103,42 @@ pages(
 ),
 ```
 
+**Standalone inside inside an integration**:
+
+```js
+import type { AstroIntegration } from 'astro';
+import { addPageDir } from 'astro-pages';
+
+export default function(options): AstroIntegration {  
+  return {
+    name: 'astro-pages',
+    hooks: {
+      'astro:config:setup': ({ config, logger, injectRoute }) => {
+        
+          const option = {
+            dir: 'custom',
+            glob: '["**.{astro,ts,js}", "!**/ignore/**"]'
+            pattern: ({ pattern }) => '/base' + pattern 
+            log: "verbose"
+            config,
+            logger,
+            injectRoute
+          }
+
+          const { 
+            patterns, 
+            entrypoints,
+            injectPages 
+          } = addPageDir(option)
+
+          injectPages()
+  
+      }
+    }
+  }
+}
+```
+
 ## `Option` Reference
 
 `pages(...options: (string | Option)[])`
