@@ -13,7 +13,7 @@ export default definePlugin({
             dir: option
           }
         }
-        addPageDir({
+        return addPageDir({
           ...option,
           config,
           logger,
