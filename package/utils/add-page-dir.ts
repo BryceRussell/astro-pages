@@ -35,14 +35,14 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
     path = dirname(path)
   }
 
-  // Check if path exists
-  if (!existsSync(path)) {
-    throw new AstroError(`[astro-pages]: '${key}' does not exist!`, path)
-  }
-
   // Check if path is pointing to Astro's page directory
   if (path === resolve(srcDir, 'pages')) {
     throw new AstroError(`[astro-pages]: '${key}' cannot point to Astro's 'pages' directory!`)
+  }
+
+  // Check if path exists
+  if (!existsSync(path)) {
+    throw new AstroError(`[astro-pages]: '${key}' does not exist!`, path)
   }
 
   return path
