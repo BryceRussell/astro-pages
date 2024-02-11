@@ -54,7 +54,7 @@ pages(
   {
     // Resolves to 'custom' dir at the root of your project
     dir: 'custom',
-    cwd: import.meta.url, // astro.config.mjs
+    cwd: dirname(fileURLToPath(import.meta.url)), // astro.config.mjs
   },
 ),
 ```
@@ -122,7 +122,7 @@ export default function(options): AstroIntegration {
       'astro:config:setup': ({ config, logger, injectRoute }) => {
         
           const option = {
-            cwd: import.meta.url,
+            cwd: dirname(fileURLToPath(import.meta.url)),
             dir: 'pages',
             glob: '["**.{astro,ts,js}"]'
             log: "minimal"
@@ -160,7 +160,7 @@ export default defineIntegration({
             "astro:config:setup": ({ addPageDir }) => {
               // Inject pages from your package's 'pages' folder
               const pages = {
-                cwd: import.meta.url,
+                cwd: dirname(fileURLToPath(import.meta.url)),
                 dir: "pages"
               }
 
