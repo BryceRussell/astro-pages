@@ -159,10 +159,18 @@ export default defineIntegration({
         return {
             "astro:config:setup": ({ addPageDir }) => {
               // Inject pages from your package's 'pages' folder
-              addPageDir({
+              const pages = {
                 cwd: import.meta.url,
                 dir: "pages"
-              })
+              }
+
+              const {
+                patterns,
+                entrypoints,
+                injectPages
+              } = addPageDir(pages)
+
+              injectPages()
             }
         }
     }
