@@ -24,12 +24,14 @@
     "./plugins/*": "./plugins/*",
     "./types": "./types.ts"
   },
+  "peerDependencies": {
+    "astro": "^4.4.0",
+    "astro-integration-kit": "^0.3.0"
+  },
   "devDependencies": {
-    "astro": "^4.3.3",
-    "fast-glob": "^3.3.2"
+    "@types/node": "^20.11.19"
   },
   "dependencies": {
-    "@types/node": "^20.11.16",
-    "astro-integration-kit": "^0.1.0"
+    "fast-glob": "^3.3.2"
   }
 }
