@@ -16,7 +16,7 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
       throw new AstroError(`[astro-pages]: '${key}' is invalid!`, path)
   }
 
-  path ??= srcDir
+  if (!path) path = srcDir
 
   // Check if path is a file URL
   if (path.startsWith('file:/')) {

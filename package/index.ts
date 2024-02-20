@@ -9,24 +9,28 @@ export default function(...options: (string | Prettify<Option>)[]): AstroIntegra
     hooks: {
       'astro:config:setup': ({ config, logger, injectRoute }) => {
         
-        for (const option of options) {
+        for (let option of options) {
 
-          const defaults: IntegrationOption = {} as IntegrationOption
-
-          if (typeof option === 'string') {
-            defaults.dir = option
-          } else {
-            if (!option || !option?.dir) continue
-            Object.assign(defaults, option)
-          }
-
-          Object.assign(defaults, {
+          const defaults = {
             config,
             logger,
             injectRoute
-          })
+          }
+          
+          if (typeof option === 'string') {
+            option = {
+              dir: option
+            }
+          }
 
-          const { injectPages } = addPageDir(defaults)
+          if (!option || !option?.dir || typeof option?.dir !== "string") {
+            logger.warn(`Skipping invalid option "${JSON.stringify(option, null, 4)}"`)
+            continue
+          }
+          
+          Object.assign(defaults, option)
+
+          const { injectPages } = addPageDir(defaults as IntegrationOption)
 
           injectPages()
         }
