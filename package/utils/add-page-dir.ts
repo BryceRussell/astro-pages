@@ -8,7 +8,7 @@ import fg from 'fast-glob';
 function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: string, base?: string): string {
   const { log, config, logger } = option
   
-  const srcDir = fileURLToPath(config.srcDir.toString())
+  const srcDir = config.srcDir.toString()
 
   // Check if path is string
   if (key === "dir") {
@@ -20,9 +20,8 @@ function stringToDir(option: IntegrationOption, key: 'dir' | 'cwd', path?: strin
 
   // Check if path is a file URL
   if (path.startsWith('file:/')) {
-    if (log === "verbose") logger.warn(`'${key}' is a file, using file's directory instead`)
-    path = dirname(fileURLToPath(path))
-  } 
+    path = fileURLToPath(path)
+  }
 
   // Check if path is relative
   if (!isAbsolute(path)) {
