@@ -120,25 +120,24 @@ export default function(options): AstroIntegration {
     name: 'astro-pages',
     hooks: {
       'astro:config:setup': ({ config, logger, injectRoute }) => {
-        
-          const option = {
-            cwd: dirname(fileURLToPath(import.meta.url)),
-            dir: 'pages',
-            glob: '["**.{astro,ts,js}"]'
-            log: "minimal"
-            config,
-            logger,
-            injectRoute
-          }
 
-          const { 
-            patterns, 
-            entrypoints,
-            injectPages 
-          } = addPageDir(option)
+        const pageConfig = {
+          cwd: import.meta.url,
+          dir: 'pages',
+          glob: ["**.{astro,ts,js}"]
+          log: "minimal"
+          config,
+          logger,
+          injectRoute
+        }
 
-          injectPages()
-  
+        const { 
+          pages,
+          injectPages 
+        } = addPageDir(pageConfig)
+
+        injectPages()
+
       }
     }
   }
@@ -158,19 +157,19 @@ export default defineIntegration({
     setup() {
         return {
             "astro:config:setup": ({ addPageDir }) => {
-              // Inject pages from your package's 'pages' folder
-              const pages = {
-                cwd: dirname(fileURLToPath(import.meta.url)),
+
+              const pageConfig = {
+                cwd: import.meta.url,
                 dir: "pages"
               }
 
-              const {
-                patterns,
-                entrypoints,
-                injectPages
-              } = addPageDir(pages)
+              const { 
+                pages,
+                injectPages 
+              } = addPageDir(pageConfig)
 
               injectPages()
+
             }
         }
     }

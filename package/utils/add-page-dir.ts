@@ -80,7 +80,7 @@ export default function addPageDir(options: IntegrationOption) {
   )
 
   // Turn entrypoints into patterns ('/blog', '/about/us')
-  let patterns: Record<string, string> = {}
+  let pages: Record<string, string> = {}
 
   for (const entrypoint of entrypoints) {
     let pattern = entrypoint                          // Transoform absolute filepath into a route pattern:
@@ -88,14 +88,14 @@ export default function addPageDir(options: IntegrationOption) {
       .replace(/(\\|\/)index$/, '')                   //   Remove 'index' from end of path
       || '/'                                          //   Default to root when replace is falsy
 
-    patterns[pattern] = entrypoint
+    pages[pattern] = entrypoint
   }
 
 
   function injectPages() {
     if (log) logger.info("Adding page directory: " + dir)
 
-    for (let [pattern, entrypoint] of Object.entries(patterns)) {
+    for (let [pattern, entrypoint] of Object.entries(pages)) {
 
       // Transform pattern if available
       if (transformer) {
@@ -125,8 +125,7 @@ export default function addPageDir(options: IntegrationOption) {
 
 
   return {
-    patterns,
-    entrypoints,
+    pages,
     injectPages
   }
 }
