@@ -70,15 +70,16 @@ export default function addPageDir(options: IntegrationOption) {
   
   // Glob filepaths of pages from dir
   const entrypoints = fg.sync(
-    [ 
+    [
       glob,
-      "!**/_*",                   // Ignore files according to the official routing convention
-      "!**/content/config.ts",    // Ignore content collection config
-      "!**/node_modules",         // Ignore node modules
-      "!**/*.(d|wasm).(ts|js)"    // Ignore sub extensions of possible API routes
+      "!**/_*", // Ignore files according to the official routing convention
+      "!**/_**/*", // Ignore directories according to the official routing convention
+      "!**/content/config.ts", // Ignore content collection config
+      "!**/node_modules", // Ignore node modules
+      "!**/*.(d|wasm).(ts|js)", // Ignore sub extensions of possible API routes
     ].flat(),
     { cwd: dir, absolute: true }
-  )
+  );
 
   // Turn entrypoints into patterns ('/blog', '/about/us')
   let pages: Record<string, string> = {}
