@@ -1,5 +1,6 @@
 {
-  "name": "simple",
+  "name": "playground",
+  "private": true,
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,9 +12,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
-    "astro": "^4.4.0",
-    "astro-integration-kit": "^0.0.12",
-    "astro-pages": "workspace:^",
-    "typescript": "^5.3.3"
+    "astro": "^4.4.6",
+    "astro-pages": "workspace:^"
   }
 }
