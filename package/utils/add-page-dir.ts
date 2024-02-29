@@ -72,6 +72,7 @@ export default function addPageDir(options: IntegrationOption) {
   const entrypoints = fg.sync(
     [ 
       glob,
+      "!**/_*",
       "!**/content/config.ts",    // Ignore content collection config
       "!**/node_modules",         // Ignore node modules
       "!**/*.(d|wasm).(ts|js)"    // Ignore sub extensions of possible API routes
