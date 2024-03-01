@@ -13,17 +13,14 @@ export default definePlugin({
 				};
 			}
 
-			Object.assign(option, { config, logger })
+			Object.assign(option, { config, logger });
 
-			const {
-				pages,
-				injectPages
-			} = addPageDir(option as IntegrationOption);
+			const { pages, injectPages } = addPageDir(option as IntegrationOption);
 
 			return {
 				pages,
-				injectPages: () => injectPages(injectRoute)
-			}
+				injectPages: () => injectPages(injectRoute),
+			};
 		};
 	},
 });
