@@ -19,5 +19,4 @@ export interface Option {
 export interface IntegrationOption extends Option {
 	config: HookParameters<"astro:config:setup">["config"];
 	logger: HookParameters<"astro:config:setup">["logger"];
-	injectRoute: HookParameters<"astro:config:setup">["injectRoute"];
 }
