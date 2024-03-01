@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { AstroError } from "astro/errors";
 import fg from "fast-glob";
 import type { IntegrationOption } from "../types";
+import type { HookParameters } from "astro";
 
 export const GLOB_PAGES = "**.{astro,ts,js}";
 
@@ -57,7 +58,6 @@ export function addPageDir(options: IntegrationOption) {
 		log,
 		config,
 		logger,
-		injectRoute,
 	} = options;
 
 	const srcDir = fileURLToPath(config.srcDir.toString());
@@ -97,7 +97,7 @@ export function addPageDir(options: IntegrationOption) {
 		pages[pattern] = entrypoint;
 	}
 
-	function injectPages() {
+	function injectPages(injectRoute: HookParameters<"astro:config:setup">["injectRoute"]) {
 		// Check if directory is pointing to Astro's page directory
 		if (dir === resolve(srcDir, "pages")) {
 			throw new AstroError(
