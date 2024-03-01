@@ -1,6 +1,6 @@
 import type { AstroIntegration } from "astro";
 import type { IntegrationOption, Option, Prettify } from "./types";
-import { addPageDir, GLOB_PAGES } from "./utils/add-page-dir";
+import { GLOB_PAGES, addPageDir } from "./utils/add-page-dir";
 
 export default function (
 	...options: (string | Prettify<Option>)[]

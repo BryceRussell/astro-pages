@@ -5,7 +5,7 @@ import { AstroError } from "astro/errors";
 import fg from "fast-glob";
 import type { IntegrationOption } from "../types";
 
-export const GLOB_PAGES = "**.{astro,ts,js}"
+export const GLOB_PAGES = "**.{astro,ts,js}";
 
 function stringToDir(
 	option: IntegrationOption,
@@ -144,4 +144,4 @@ export function addPageDir(options: IntegrationOption) {
 	};
 }
 
-export default addPageDir
+export default addPageDir;
