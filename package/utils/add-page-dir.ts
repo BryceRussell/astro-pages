@@ -75,23 +75,23 @@ export default function addPageDir(options: IntegrationOption) {
 		glob = "**.{astro,ts,js}";
 	}
 
-  // Handle glob default including empty array case
-  if (!glob || (Array.isArray(glob) && !glob.length)) {
-    glob = '**.{astro,ts,js}'
-  }
-  
-  // Glob filepaths of pages from dir
-  const entrypoints = fg.sync(
-    [
-      glob,
-      "!**/_*", // Ignore files according to the official routing convention
-      "!**/_**/*", // Ignore directories according to the official routing convention
-      "!**/content/config.ts", // Ignore content collection config
-      "!**/node_modules", // Ignore node modules
-      "!**/*.(d|wasm).(ts|js)", // Ignore sub extensions of possible API routes
-    ].flat(),
-    { cwd: dir, absolute: true }
-  );
+	// Handle glob default including empty array case
+	if (!glob || (Array.isArray(glob) && !glob.length)) {
+		glob = "**.{astro,ts,js}";
+	}
+
+	// Glob filepaths of pages from dir
+	const entrypoints = fg.sync(
+		[
+			glob,
+			"!**/_*", // Ignore files according to the official routing convention
+			"!**/_**/*", // Ignore directories according to the official routing convention
+			"!**/content/config.ts", // Ignore content collection config
+			"!**/node_modules", // Ignore node modules
+			"!**/*.(d|wasm).(ts|js)", // Ignore sub extensions of possible API routes
+		].flat(),
+		{ cwd: dir, absolute: true },
+	);
 
 	// Turn entrypoints into patterns ('/blog', '/about/us')
 	const pages: Record<string, string> = {};
@@ -137,9 +137,8 @@ export default function addPageDir(options: IntegrationOption) {
 		}
 	}
 
-
-  return {
-    pages,
-    injectPages
-  }
+	return {
+		pages,
+		injectPages,
+	};
 }
