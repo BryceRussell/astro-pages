@@ -3,9 +3,16 @@
   "private": true,
   "version": "0.0.1",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "playground:dev": "pnpm --filter playground dev",
+    "changeset": "changeset",
+    "lint": "biome check .",
+    "lint:fix": "biome check --apply ."
+  },
   "license": "MIT",
   "devDependencies": {
-    "astro": "^4.3.3"
+    "astro": "^4.4.6",
+    "@biomejs/biome": "^1.5.3",
+    "@changesets/cli": "^2.27.1"
   }
 }
