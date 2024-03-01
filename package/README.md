@@ -130,8 +130,7 @@ export default function(options): AstroIntegration {
           cwd: import.meta.url,
           dir: 'pages',
           config,
-          logger,
-          injectRoute
+          logger
         }
 
         const { 
@@ -140,7 +139,7 @@ export default function(options): AstroIntegration {
         } = addPageDir(pageConfig)
 
         // Injects pages inside 'package/pages'
-        injectPages()
+        injectPages(injectRoute)
 
       }
     }
