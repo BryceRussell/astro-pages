@@ -13,7 +13,6 @@ export default function (
 					const defaults = {
 						config,
 						logger,
-						injectRoute,
 					};
 
 					if (typeof option === "string") {
@@ -33,7 +32,7 @@ export default function (
 
 					const { injectPages } = addPageDir(defaults as IntegrationOption);
 
-					injectPages();
+					injectPages(injectRoute);
 				}
 			},
 		},
