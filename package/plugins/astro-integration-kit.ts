@@ -5,7 +5,7 @@ import addPageDir from "../utils/add-page-dir";
 export default definePlugin({
 	name: "addPageDir",
 	hook: "astro:config:setup",
-	implementation: ({ config, logger, injectRoute }) => {
+	implementation: ({ config, logger }) => {
 		return (option: string | Option) => {
 			if (typeof option === "string") {
 				option = {
@@ -16,7 +16,6 @@ export default definePlugin({
 				...option,
 				config,
 				logger,
-				injectRoute,
 			});
 		};
 	},
