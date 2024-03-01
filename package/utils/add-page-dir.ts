@@ -8,20 +8,18 @@ import type { IntegrationOption } from "../types";
 function stringToDir(
 	option: IntegrationOption,
 	key: "dir" | "cwd",
+	base: string,
 	path?: string,
-	base?: string,
 ): string {
-	const { log, config, logger } = option;
-
-	const srcDir = config.srcDir.toString();
+	const { log, logger } = option;
 
 	// Check if path is string
 	if (key === "dir") {
 		if (!path || typeof path !== "string")
-			throw new AstroError(`[astro-pages]: '${key}' is invalid!`, path);
+			throw new AstroError(`'${key}' path is invalid!`, path);
 	}
 
-	if (!path) path = srcDir;
+	if (!path) path = base;
 
 	// Check if path is a file URL
 	if (path.startsWith("file:/")) {
@@ -30,7 +28,7 @@ function stringToDir(
 
 	// Check if path is relative
 	if (!isAbsolute(path)) {
-		path = resolve(base || srcDir, path);
+		path = resolve(base, path);
 	}
 
 	// Check if path is a file
@@ -40,16 +38,9 @@ function stringToDir(
 		path = dirname(path);
 	}
 
-	// Check if path is pointing to Astro's page directory
-	if (path === resolve(srcDir, "pages")) {
-		throw new AstroError(
-			`[astro-pages]: '${key}' cannot point to Astro's 'pages' directory!`,
-		);
-	}
-
 	// Check if path exists
 	if (!existsSync(path)) {
-		throw new AstroError(`[astro-pages]: '${key}' does not exist!`, path);
+		throw new AstroError(`'${key}' path does not exist!`, path);
 	}
 
 	return path;
@@ -62,18 +53,16 @@ export default function addPageDir(options: IntegrationOption) {
 		glob,
 		pattern: transformer,
 		log,
+		config,
 		logger,
 		injectRoute,
 	} = options;
 
-	cwd = stringToDir(options, "cwd", cwd);
+	const srcDir = fileURLToPath(config.srcDir.toString());
 
-	dir = stringToDir(options, "dir", dir, cwd);
+	cwd = stringToDir(options, "cwd", srcDir, cwd);
 
-	// Handle glob default including empty array case
-	if (!glob || (Array.isArray(glob) && !glob.length)) {
-		glob = "**.{astro,ts,js}";
-	}
+	dir = stringToDir(options, "dir", cwd, dir);
 
 	// Handle glob default including empty array case
 	if (!glob || (Array.isArray(glob) && !glob.length)) {
@@ -98,7 +87,7 @@ export default function addPageDir(options: IntegrationOption) {
 
 	for (const entrypoint of entrypoints) {
 		const pattern =
-			entrypoint // Transoform absolute filepath into a route pattern:
+			entrypoint // Transform absolute filepath into a route pattern:
 				.slice(dir.length, -extname(entrypoint).length) //   Get path between page dir and file extension
 				.replace(/(\\|\/)index$/, "") || //   Remove 'index' from end of path
 			"/"; //   Default to root when replace is falsy
@@ -107,7 +96,15 @@ export default function addPageDir(options: IntegrationOption) {
 	}
 
 	function injectPages() {
-		if (log) logger.info("Adding page directory: " + dir);
+		// Check if directory is pointing to Astro's page directory
+		if (dir === resolve(srcDir, "pages")) {
+			throw new AstroError(
+				`Failed to inject pages! Directory cannot point to Astro's 'pages' directory`,
+				dir,
+			);
+		}
+
+		if (log) logger.info("Adding pages: " + dir);
 
 		for (let [pattern, entrypoint] of Object.entries(pages)) {
 			// Transform pattern if available
