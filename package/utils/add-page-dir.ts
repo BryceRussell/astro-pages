@@ -5,7 +5,6 @@ import type { HookParameters } from "astro";
 import { AstroError } from "astro/errors";
 import fg from "fast-glob";
 import type { IntegrationOption } from "../types";
-import type { HookParameters } from "astro";
 
 export const GLOB_PAGES = "**.{astro,ts,js}";
 
