@@ -1,13 +1,16 @@
 # `astro-pages`
 
+[![npm version](https://img.shields.io/npm/v/astro-pages?labelColor=red&color=grey)](https://www.npmjs.com/package/astro-pages)
+[![readme](https://img.shields.io/badge/README-blue)](https://www.npmjs.com/package/astro-pages)
+
 Add custom file based routing directories in Astro
 
 ## Why `astro-pages`?
 
-Astro does not have an option to change the location of the `page` folder, and ignoring files/folders  requires you to prefix their names with an underscore `_`.
+Astro does not have an option to change the location of the `page` folder, you can't have multiple page folders (ex: inside a package), and ignoring pages normally requires you to prefix the file name with an underscore `_`.
 
 ## Features
-- Add file based routing anywhere inside your project
+- Add file based routing anywhere inside your project or package
 - Use glob patterns to match routes
 - Supports negative glob patterns to ignore routes
 - Override/transform route patterns
@@ -28,21 +31,22 @@ import { defineConfig } from 'astro/config';
 import pages from 'astro-pages';
 
 export default defineConfig({
-  // Create 'page' directory at 'src/custom'
-  integrations: [pages('custom')],
+  // Inject pages inside 'src/routes'
+  integrations: [ pages('routes') ],
 });
 ```
 
 ## Examples
 
-**Adding page directories**
+**Create multiple page directories**
 
 ```js
-// Create 'page' directories at 'src/blog' and `src/projects`
+// Create 'page' directories at 'src/routes' and `routes/`
 pages(
-  'blog', 
+  'routes', 
   {
-    dir: 'projects'
+    cwd: '../',
+    dir: 'routes'
   }
 )
 ```
@@ -52,9 +56,9 @@ pages(
 ```js
 pages(
   {
-    // Resolves to 'custom' dir at the root of your project
-    dir: 'custom',
-    cwd: dirname(fileURLToPath(import.meta.url)), // astro.config.mjs
+    // Resolves to 'routes' dir at the root of your project
+    dir: 'routes',
+    cwd: '../', // project root
   },
 ),
 ```
@@ -64,7 +68,7 @@ pages(
 ```js
 pages(
   {
-    dir: 'custom',
+    dir: 'routes',
     // Ignore all routes inside 'src/custom/ignore'
     glob: '["**.{astro,ts,js}", "!**/ignore/**"]'
   },
@@ -76,19 +80,19 @@ pages(
 ```js
 pages(
   {
-    dir: 'custom',
+    dir: 'routes',
     // Transform page patterns, add base path to routes
     pattern: ({ pattern }) => '/base' + pattern 
   },
 ),
 ```
 
-**Customize logging**
+**Debug with verbose logging**
 
 ```js
 pages(
   {
-    dir: 'custom',
+    dir: 'routes',
     // Log injetced pages and warnings
     log: "verbose"
   },
@@ -100,7 +104,7 @@ pages(
 ```js
 pages(
   {
-    dir: 'custom',
+    dir: 'routes',
     glob: '["**.{astro,ts,js}", "!**/ignore/**"]'
     pattern: ({ pattern }) => '/base' + pattern 
     log: "verbose"
@@ -112,6 +116,7 @@ pages(
 **Standalone inside inside an integration**:
 
 ```js
+// package/index.ts
 import type { AstroIntegration } from 'astro';
 import { addPageDir } from 'astro-pages';
 
@@ -124,8 +129,6 @@ export default function(options): AstroIntegration {
         const pageConfig = {
           cwd: import.meta.url,
           dir: 'pages',
-          glob: ["**.{astro,ts,js}"]
-          log: "minimal"
           config,
           logger,
           injectRoute
@@ -136,6 +139,7 @@ export default function(options): AstroIntegration {
           injectPages 
         } = addPageDir(pageConfig)
 
+        // Injects pages inside 'package/pages'
         injectPages()
 
       }
@@ -147,7 +151,7 @@ export default function(options): AstroIntegration {
 **Use as a [`astro-integration-kit`](https://astro-integration-kit.netlify.app/getting-started/installation/) plugin**
 
 ```js
-// my-package/index.ts
+// package/index.ts
 import { defineIntegration } from "astro-integration-kit";
 import addPageDirPlugin from "astro-pages/plugins/astro-integration-kit.ts";
 
@@ -168,6 +172,7 @@ export default defineIntegration({
                 injectPages 
               } = addPageDir(pageConfig)
 
+              // Injects pages inside 'package/pages'
               injectPages()
 
             }
@@ -182,7 +187,9 @@ export default defineIntegration({
 
 **Type**: `string`
 
-Directory of pages, relative dirs are resolved relative to `srcDir` (`/src` by default). Directories located outside the root of your project may cause problems.
+The page directory, relative dirs are resolved relative to `srcDir` (`/src` by default).
+
+> **Note**: Directories located outside the root of your project may cause problems since they are not loaded by Astro
 
 ### `cwd`
 
@@ -190,7 +197,7 @@ Directory of pages, relative dirs are resolved relative to `srcDir` (`/src` by d
 
 **Default**: Astro config `srcDir`
 
-Directory that the `dir` option is resolved to if it is relative. If the `cwd` option is relative it is resolved relative to the `srcDir` in Astro config (`/src` by default).
+Directory that the `dir` option is resolved to if it is relative. If the `cwd` option itself relative it is resolved relative to the `srcDir` in Astro config (`/src` by default).
 
 ### `glob`
 
@@ -198,7 +205,9 @@ Directory that the `dir` option is resolved to if it is relative. If the `cwd` o
 
 **Default**: `"**.{astro,ts,js}"`
 
-A glob pattern (or array of glob patterns) matching pages inside your page directory. [Supports negative patterns](https://www.npmjs.com/package/fast-glob#how-to-exclude-directory-from-reading) to ignore specific paths. Only point to file extensions that Astro supports!
+A glob pattern (or array of glob patterns) matching page files inside your page directory. [Supports negative patterns](https://www.npmjs.com/package/fast-glob#how-to-exclude-directory-from-reading) to ignore specific paths. 
+
+> **Note**: Only glob files that Astro supports! (`.astro`, `.ts`, and `.js` by default)
 
 ### `pattern`
 
