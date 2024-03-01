@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "",
-  "packageManager": "pnpm@8.7.4",
+  "packageManager": "pnpm@8.15.2",
   "scripts": {
     "playground:dev": "pnpm --filter playground dev",
     "changeset": "changeset",
