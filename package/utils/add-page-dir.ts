@@ -48,10 +48,11 @@ function stringToDir(
 	return path;
 }
 
-export default function addPageDir(options: IntegrationOption) {
+export function addPageDir(options: IntegrationOption) {
 	let {
 		dir,
 		cwd,
+		glob = GLOB_PAGES,
 		pattern: transformer,
 		log,
 		config,
@@ -142,3 +143,5 @@ export default function addPageDir(options: IntegrationOption) {
 		injectPages,
 	};
 }
+
+export default addPageDir
