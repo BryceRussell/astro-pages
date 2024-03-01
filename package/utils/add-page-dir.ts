@@ -98,7 +98,7 @@ export default function addPageDir(options: IntegrationOption) {
 
 	for (const entrypoint of entrypoints) {
 		const pattern =
-			entrypoint // Transoform absolute filepath into a route pattern:
+			entrypoint // Transform absolute filepath into a route pattern:
 				.slice(dir.length, -extname(entrypoint).length) //   Get path between page dir and file extension
 				.replace(/(\\|\/)index$/, "") || //   Remove 'index' from end of path
 			"/"; //   Default to root when replace is falsy
