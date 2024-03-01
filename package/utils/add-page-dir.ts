@@ -131,6 +131,8 @@ export default function addPageDir(options: IntegrationOption) {
 			if (log === "verbose") logger.info("Injecting pattern: " + pattern);
 
 			injectRoute({
+				// @ts-expect-error "Object literal may only specify known properties"
+				entryPoint: entrypoint,
 				entrypoint,
 				pattern,
 			});
