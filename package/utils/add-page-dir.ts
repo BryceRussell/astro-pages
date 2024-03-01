@@ -5,6 +5,8 @@ import { AstroError } from "astro/errors";
 import fg from "fast-glob";
 import type { IntegrationOption } from "../types";
 
+export const GLOB_PAGES = "**.{astro,ts,js}";
+
 function stringToDir(
 	option: IntegrationOption,
 	key: "dir" | "cwd",
@@ -46,11 +48,11 @@ function stringToDir(
 	return path;
 }
 
-export default function addPageDir(options: IntegrationOption) {
+export function addPageDir(options: IntegrationOption) {
 	let {
 		dir,
 		cwd,
-		glob,
+		glob = GLOB_PAGES,
 		pattern: transformer,
 		log,
 		config,
@@ -65,8 +67,8 @@ export default function addPageDir(options: IntegrationOption) {
 	dir = stringToDir(options, "dir", cwd, dir);
 
 	// Handle glob default including empty array case
-	if (!glob || (Array.isArray(glob) && !glob.length)) {
-		glob = "**.{astro,ts,js}";
+	if (Array.isArray(glob) && glob.length <= 0) {
+		glob = GLOB_PAGES;
 	}
 
 	// Glob filepaths of pages from dir
@@ -141,3 +143,5 @@ export default function addPageDir(options: IntegrationOption) {
 		injectPages,
 	};
 }
+
+export default addPageDir;
