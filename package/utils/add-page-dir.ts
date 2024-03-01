@@ -96,11 +96,11 @@ export default function addPageDir(options: IntegrationOption) {
 	}
 
 	function injectPages() {
-		
 		// Check if directory is pointing to Astro's page directory
 		if (dir === resolve(srcDir, "pages")) {
 			throw new AstroError(
-				`Failed to inject pages! Directory cannot point to Astro's 'pages' directory`, dir
+				`Failed to inject pages! Directory cannot point to Astro's 'pages' directory`,
+				dir,
 			);
 		}
 
