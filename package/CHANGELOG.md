@@ -1,5 +1,11 @@
 # astro-pages
 
+## 0.2.1
+
+### Patch Changes
+
+- c3fa7b9: Fix peerDependencies
+
 ## 0.2.0
 
 ### Minor Changes
