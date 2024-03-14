@@ -1,19 +1,19 @@
 {
-  "name": "package-root",
-  "private": true,
-  "version": "0.0.1",
-  "description": "",
-  "packageManager": "pnpm@8.15.2",
-  "scripts": {
-    "playground:dev": "pnpm --filter playground dev",
-    "changeset": "changeset",
-    "lint": "biome check .",
-    "lint:fix": "biome check --apply ."
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "astro": "^4.4.6",
-    "@biomejs/biome": "^1.5.3",
-    "@changesets/cli": "^2.27.1"
-  }
+	"name": "package-root",
+	"private": true,
+	"version": "0.0.1",
+	"description": "",
+	"packageManager": "pnpm@8.15.2",
+	"scripts": {
+		"playground:dev": "pnpm --filter playground dev",
+		"changeset": "changeset",
+		"lint": "biome check .",
+		"lint:fix": "biome check --apply ."
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "^1.6.1",
+		"@changesets/cli": "^2.27.1",
+		"astro": "^4.5.4"
+	}
 }
