@@ -1,37 +1,33 @@
 {
-  "name": "astro-pages",
-  "version": "0.2.0",
-  "description": "Add custom file based routing directories in Astro",
-  "keywords": [
-    "astro",
-    "withastro",
-    "astro-integration"
-  ],
-  "author": "Bryce Russell",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/brycerussell/astro-pages",
-    "directory": "packages/astro-pages"
-  },
-  "bugs": "https://github.com/brycerussell/astro-pages/issues",
-  "homepage": "https://github.com/brycerussell/astro-pages",
-  "scripts": {},
-  "type": "module",
-  "exports": {
-    ".": "./index.ts",
-    "./utils/*": "./utils/*",
-    "./plugins/*": "./plugins/*",
-    "./types": "./types.ts"
-  },
-  "peerDependencies": {
-    "astro": "^4.4.0",
-    "astro-integration-kit": "^0.3.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.24"
-  },
-  "dependencies": {
-    "fast-glob": "^3.3.2"
-  }
+	"name": "astro-pages",
+	"version": "0.2.0",
+	"description": "Add custom file based routing directories in Astro",
+	"keywords": ["astro", "withastro", "astro-integration"],
+	"author": "Bryce Russell",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/brycerussell/astro-pages",
+		"directory": "packages/astro-pages"
+	},
+	"bugs": "https://github.com/brycerussell/astro-pages/issues",
+	"homepage": "https://github.com/brycerussell/astro-pages",
+	"scripts": {},
+	"type": "module",
+	"exports": {
+		".": "./index.ts",
+		"./utils/*": "./utils/*",
+		"./plugins/*": "./plugins/*",
+		"./types": "./types.ts"
+	},
+	"peerDependencies": {
+		"astro": ">=3",
+		"astro-integration-kit": ">=0.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.27"
+	},
+	"dependencies": {
+		"fast-glob": "^3.3.2"
+	}
 }
