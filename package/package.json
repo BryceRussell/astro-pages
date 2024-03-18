@@ -29,7 +29,7 @@
 		"astro-integration-kit": ">=0.1.0"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.27"
+		"@types/node": "^20.11.28"
 	},
 	"dependencies": {
 		"fast-glob": "^3.3.2"
