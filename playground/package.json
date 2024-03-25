@@ -11,7 +11,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.4.1",
+		"@astrojs/check": "^0.5.10",
 		"astro": "^4.4.6",
 		"astro-pages": "workspace:^"
 	}
