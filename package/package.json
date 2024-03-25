@@ -2,11 +2,7 @@
 	"name": "astro-pages",
 	"version": "0.2.1",
 	"description": "Add custom file based routing directories in Astro",
-	"keywords": [
-		"astro",
-		"withastro",
-		"astro-integration"
-	],
+	"keywords": ["astro", "withastro", "astro-integration"],
 	"author": "Bryce Russell",
 	"license": "MIT",
 	"repository": {
@@ -29,7 +25,7 @@
 		"astro-integration-kit": ">=0.1.0"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.27"
+		"@types/node": "^20.11.30"
 	},
 	"dependencies": {
 		"fast-glob": "^3.3.2"
