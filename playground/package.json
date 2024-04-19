@@ -11,11 +11,9 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/tailwind": "^5.1.0",
 		"astro": "^4.6.1",
 		"astro-integration-kit": "^0.11.0",
-		"astro-pages": "workspace:*",
-		"tailwindcss": "^3.4.3"
+		"astro-pages": "workspace:*"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.5.10",
