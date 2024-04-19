@@ -1,9 +1,8 @@
 import type { AstroIntegration } from "astro";
-import type { IntegrationOption, Option, Prettify } from "./types";
-import { GLOB_PAGES, addPageDir } from "./utils/add-page-dir";
+import addPageDir, { type IntegrationOption, type Option } from "./utility.js";
 
 export default function (
-	...options: (string | Prettify<Option>)[]
+	...options: (string | Option)[]
 ): AstroIntegration {
 	return {
 		name: "astro-pages",
@@ -38,5 +37,3 @@ export default function (
 		},
 	};
 }
-
-export { addPageDir, GLOB_PAGES };
