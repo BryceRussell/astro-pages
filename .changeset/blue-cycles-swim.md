@@ -2,7 +2,9 @@
 "astro-pages": minor
 ---
 
-Added a build step and restructured the package. All exports except for the root module have been removed:
+- Added a build step and restructured the package.
+- The `astro-integration-kit` plugin was removed, use the utility instead
+- All exports from `astro-pages/plugins` and `astro-pages/utils` have been removed, import from `astro-pages` instead:
 
 ```ts
 // Use the types
