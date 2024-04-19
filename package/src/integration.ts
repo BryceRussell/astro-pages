@@ -1,9 +1,7 @@
 import type { AstroIntegration } from "astro";
 import addPageDir, { type IntegrationOption, type Option } from "./utility.js";
 
-export default function (
-	...options: (string | Option)[]
-): AstroIntegration {
+export default function (...options: (string | Option)[]): AstroIntegration {
 	return {
 		name: "astro-pages",
 		hooks: {

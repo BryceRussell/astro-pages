@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"moduleResolution": "Node16",
 		"resolveJsonModule": true,
-		"module": "Node16",
+		"module": "Node16"
 	},
 	"exclude": ["dist"]
 }

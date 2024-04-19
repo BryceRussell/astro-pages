@@ -2,11 +2,7 @@
 	"name": "astro-pages",
 	"version": "0.2.1",
 	"description": "Add custom file based routing directories in Astro",
-	"keywords": [
-		"astro",
-		"withastro",
-		"astro-integration"
-	],
+	"keywords": ["astro", "withastro", "astro-integration"],
 	"author": "Bryce Russell",
 	"license": "MIT",
 	"repository": {
@@ -27,9 +23,7 @@
 			"default": "./dist/index.js"
 		}
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"dev": "tsup --watch",
 		"build": "tsup"

@@ -19,16 +19,18 @@ export type Option = Prettify<{
 		ext: string;
 		pattern: string;
 	}) => string;
-}>
+}>;
 
-export type IntegrationOption = Prettify<Option & {
-	config: HookParameters<"astro:config:setup">["config"];
-	logger: HookParameters<"astro:config:setup">["logger"];
-}>
+export type IntegrationOption = Prettify<
+	Option & {
+		config: HookParameters<"astro:config:setup">["config"];
+		logger: HookParameters<"astro:config:setup">["logger"];
+	}
+>;
 
 export const GLOB_PAGES = "**.{astro,ts,js}";
 
-export default function(options: IntegrationOption) {
+export default function (options: IntegrationOption) {
 	let {
 		dir,
 		cwd,

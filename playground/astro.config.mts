@@ -7,18 +7,18 @@ const { default: packageName, addPageDir } = await import("astro-pages");
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
-		packageName('custom'),
+		packageName("custom"),
 		{
-			name: 'test',
+			name: "test",
 			hooks: {
 				"astro:config:setup": ({ config, logger }) => {
 					const { pages, injectPages } = addPageDir({
-						dir: 'custom',
+						dir: "custom",
 						config,
-						logger
-					})
-				}
-			}
+						logger,
+					});
+				},
+			},
 		},
 		hmrIntegration({
 			directory: createResolver(import.meta.url).resolve("../package/dist"),
