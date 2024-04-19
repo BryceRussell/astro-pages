@@ -12,20 +12,28 @@
 	},
 	"bugs": "https://github.com/brycerussell/astro-pages/issues",
 	"homepage": "https://github.com/brycerussell/astro-pages",
-	"scripts": {},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
+	"sideEffects": false,
 	"exports": {
-		".": "./index.ts",
-		"./utils/*": "./utils/*",
-		"./plugins/*": "./plugins/*",
-		"./types": "./types.ts"
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"files": ["dist"],
+	"scripts": {
+		"dev": "tsup --watch",
+		"build": "tsup"
 	},
 	"peerDependencies": {
-		"astro": ">=3",
-		"astro-integration-kit": ">=0.1.0"
+		"astro": ">=3"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.30"
+		"@types/node": "^20.11.30",
+		"tsup": "^8.0.2"
 	},
 	"dependencies": {
 		"fast-glob": "^3.3.2"

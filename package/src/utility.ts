@@ -4,52 +4,33 @@ import { fileURLToPath } from "node:url";
 import type { HookParameters } from "astro";
 import { AstroError } from "astro/errors";
 import fg from "fast-glob";
-import type { IntegrationOption } from "../types";
+
+type Prettify<T> = { [K in keyof T]: T[K] } & {};
+
+export type Option = Prettify<{
+	log?: "verbose" | "minimal" | boolean | null | undefined;
+	cwd?: string;
+	dir: string;
+	glob?: string | string[];
+	pattern?: (context: {
+		cwd: string;
+		dir: string;
+		entrypoint: string;
+		ext: string;
+		pattern: string;
+	}) => string;
+}>;
+
+export type IntegrationOption = Prettify<
+	Option & {
+		config: HookParameters<"astro:config:setup">["config"];
+		logger: HookParameters<"astro:config:setup">["logger"];
+	}
+>;
 
 export const GLOB_PAGES = "**.{astro,ts,js}";
 
-function stringToDir(
-	option: IntegrationOption,
-	key: "dir" | "cwd",
-	base: string,
-	path?: string,
-): string {
-	const { log, logger } = option;
-
-	// Check if path is string
-	if (key === "dir") {
-		if (!path || typeof path !== "string")
-			throw new AstroError(`'${key}' path is invalid!`, path);
-	}
-
-	if (!path) path = base;
-
-	// Check if path is a file URL
-	if (path.startsWith("file:/")) {
-		path = fileURLToPath(path);
-	}
-
-	// Check if path is relative
-	if (!isAbsolute(path)) {
-		path = resolve(base, path);
-	}
-
-	// Check if path is a file
-	if (extname(path)) {
-		if (log === "verbose")
-			logger.warn(`'${key}' is a file, using file's directory instead`);
-		path = dirname(path);
-	}
-
-	// Check if path exists
-	if (!existsSync(path)) {
-		throw new AstroError(`'${key}' path does not exist!`, path);
-	}
-
-	return path;
-}
-
-export function addPageDir(options: IntegrationOption) {
+export default function (options: IntegrationOption) {
 	let {
 		dir,
 		cwd,
@@ -146,4 +127,43 @@ export function addPageDir(options: IntegrationOption) {
 	};
 }
 
-export default addPageDir;
+function stringToDir(
+	option: IntegrationOption,
+	key: "dir" | "cwd",
+	base: string,
+	path?: string,
+): string {
+	const { log, logger } = option;
+
+	// Check if path is string
+	if (key === "dir") {
+		if (!path || typeof path !== "string")
+			throw new AstroError(`'${key}' path is invalid!`, path);
+	}
+
+	if (!path) path = base;
+
+	// Check if path is a file URL
+	if (path.startsWith("file:/")) {
+		path = fileURLToPath(path);
+	}
+
+	// Check if path is relative
+	if (!isAbsolute(path)) {
+		path = resolve(base, path);
+	}
+
+	// Check if path is a file
+	if (extname(path)) {
+		if (log === "verbose")
+			logger.warn(`'${key}' is a file, using file's directory instead`);
+		path = dirname(path);
+	}
+
+	// Check if path exists
+	if (!existsSync(path)) {
+		throw new AstroError(`'${key}' path does not exist!`, path);
+	}
+
+	return path;
+}

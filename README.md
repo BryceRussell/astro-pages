@@ -7,7 +7,7 @@ Add custom file based routing directories in Astro
 
 ### Examples
 
-#### Integration
+#### Astro Integration
 
 ```ts
 // astro.config.mjs
@@ -53,37 +53,3 @@ export default function(options): AstroIntegration {
   }
 }
 ```
-
-#### Astro Integration Kit Plugin
-
-```ts
-// package/index.ts
-import { defineIntegration } from "astro-integration-kit";
-import addPageDirPlugin from "astro-pages/plugins/astro-integration-kit.ts";
-
-export default defineIntegration({
-    name: "my-integration",
-    plugins: [addPageDirPlugin],
-    setup() {
-        return {
-            "astro:config:setup": ({ addPageDir }) => {
-
-              const pageConfig = {
-                cwd: import.meta.url,
-                dir: "pages"
-              }
-
-              const { 
-                pages,
-                injectPages 
-              } = addPageDir(pageConfig)
-
-              // Injects pages inside 'package/pages'
-              injectPages()
-
-            }
-        }
-    }
-})
-```
-

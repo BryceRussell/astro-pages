@@ -1,8 +1,8 @@
 {
 	"name": "playground",
-	"private": true,
 	"type": "module",
 	"version": "0.0.1",
+	"private": true,
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -11,8 +11,13 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.4.1",
-		"astro": "^4.5.9",
-		"astro-pages": "workspace:^"
+		"astro": "^4.6.1",
+		"astro-integration-kit": "^0.11.0",
+		"astro-pages": "workspace:*"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.5.10",
+		"@types/node": "^20.12.7",
+		"typescript": "^5.4.5"
 	}
 }
