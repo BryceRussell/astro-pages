@@ -11,13 +11,13 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"astro": "^4.6.1",
-		"astro-integration-kit": "^0.11.0",
+		"astro": "^5.0.4",
+		"astro-integration-kit": "^0.17.0",
 		"astro-pages": "workspace:*"
 	},
 	"devDependencies": {
-		"@astrojs/check": "^0.5.10",
-		"@types/node": "^20.12.7",
-		"typescript": "^5.4.5"
+		"@astrojs/check": "^0.9.4",
+		"@types/node": "^22.10.1",
+		"typescript": "^5.7.2"
 	}
 }

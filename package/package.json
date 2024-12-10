@@ -38,8 +38,8 @@
 		"astro": ">=3"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.30",
-		"tsup": "^8.0.2"
+		"@types/node": "^22.10.1",
+		"tsup": "^8.3.5"
 	},
 	"dependencies": {
 		"fast-glob": "^3.3.2"
