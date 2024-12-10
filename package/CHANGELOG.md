@@ -1,5 +1,11 @@
 # astro-pages
 
+## 0.3.1
+
+### Patch Changes
+
+- 9c61739: Upgrade to Astro 5.0
+
 ## 0.3.0
 
 ### Minor Changes
